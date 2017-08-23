@@ -1,0 +1,1 @@
+rm ca.* local.net.*
