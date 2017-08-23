@@ -1,3 +1,8 @@
+
+
+Subscritions: https://access.redhat.com/solutions/253273
+sudo subscription-manager register --username chad.homan --password 4thFl00r --auto-attach
+
 '''
 sudo subscription-manager release --list
 +-------------------------------------------+
@@ -13,3 +18,12 @@ sudo subscription-manager release --list
 '''
 sudo subscription-manager release --set=7.2
 '''
+
+sudo subscription-manager repos --enable=rhel-7-server-optional-rpms
+sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
+sudo subscription-manager repos --enable=rhel-7-server-rpms
+
+
+
+:q!
+
