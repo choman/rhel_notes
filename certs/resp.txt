@@ -1,5 +1,5 @@
 US
-Name (full name) []:NE
+NE
 omaha
 .
 .
