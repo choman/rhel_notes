@@ -1,0 +1,4 @@
+certs/ca.*
+certs/local.net.*
+docker-compose-Linux-x86_64
+harbor-offline*tgz
