@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SERVER_IP=172.168.1.40
+SERVER_IP=172.16.1.40
 SERVER_HN="reg2 reg2.local.net"
 
 echo "$SERVER_IP    $SERVER_HN" | sudo tee -a /etc/hosts
