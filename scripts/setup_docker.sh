@@ -8,6 +8,7 @@ DOCKER_URL=http://${KICKSTART_IP}/yum/docker/docker.repo
 DOCKER72_DEPS_URL=http://${KICKSTART_IP}/yum/docker72deps/docker72deps.repo
 
 VERSION=$(cut -d: -f5 /etc/system-release-cpe)
+TYPE=$(cut -d: -f7 /etc/system-release-cpe)
 
 
 
@@ -34,6 +35,34 @@ sudo usermod -a -G docker dcw_admin
 
 
 echo "$HARBOR_IP   $HARBOR_HN" | sudo tee -a /etc/hosts
+
+
+if [ $TYPE = "server" ]; then
+   cd ../certs
+   ./make.sh
+
+   if [ ! -d /data/cert ]; then
+      sudo mkdir -p /data/cert
+   fi
+   sudo cp -v local.net.crt local.net.key /data/cert
+   sudo cp -v local.net.crt /etc/pki/ca-trust/source/anchors/reg2.local.net.crt
+
+else 
+   scp dcw_admin@$SERVER_IP:/home/dcw_admin/rhel_notes/certs/local.net.crt /tmp
+   sudo cp -v /tmp/local.net.crt /etc/pki/ca-trust/source/anchors/reg2.local.net.crt
+
+fi
+
+sudo chmod 644 /etc/pki/ca-trust/source/anchors/reg2.local.net.crt
+
+echo "updating trusts"
+sudo update-ca-trust
+
+
+##echo "restarting docker"
+##sudo systemctl stop docker
+##sudo systemctl start docker
+
 
 
 

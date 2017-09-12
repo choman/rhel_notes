@@ -22,4 +22,5 @@ echo "stage 3"
 openssl x509 -req -days 365 -in local.net.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out local.net.crt
 
 
-sudo ./install.sh	
+##sudo ./install.sh	
+
