@@ -26,8 +26,6 @@ fi
 
 sudo yum install -y docker-ce docker-compose
 
-sudo systemctl enable docker
-
 
 #
 # need something for all users
@@ -48,7 +46,7 @@ if [ $TYPE = "server" ]; then
    sudo cp -v local.net.crt /etc/pki/ca-trust/source/anchors/reg2.local.net.crt
 
 else 
-   scp dcw_admin@$SERVER_IP:/home/dcw_admin/rhel_notes/certs/local.net.crt /tmp
+   scp dcw_admin@$HARBOR_IP:/home/dcw_admin/rhel_notes/certs/local.net.crt /tmp
    sudo cp -v /tmp/local.net.crt /etc/pki/ca-trust/source/anchors/reg2.local.net.crt
 
 fi
@@ -59,10 +57,8 @@ echo "updating trusts"
 sudo update-ca-trust
 
 
-##echo "restarting docker"
-##sudo systemctl stop docker
-##sudo systemctl start docker
-
-
-
+echo "starting docker"
+sudo systemctl enable docker
+sleep 2
+sudo systemctl start docker
 
