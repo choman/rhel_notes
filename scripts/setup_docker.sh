@@ -10,10 +10,16 @@ DOCKER72_DEPS_URL=http://${KICKSTART_IP}/yum/docker72deps/docker72deps.repo
 VERSION=$(cut -d: -f5 /etc/system-release-cpe)
 
 
-sudo yum-config-manager --add-repo $DOCKER_URL
 
 if [ $VERSION = "7.2" ]; then
-   sudo yum-config-manager --add-repo $DOCKER72_DEPS_URL
+   YUM_REPOS=/etc/yum.repos.d
+
+   sudo wget -P $YUM_REPOS $DOCKER_URL
+   sudo wget -P $YUM_REPOS $DOCKER72_DEPS_URL
+   
+else
+   sudo yum-config-manager --add-repo $DOCKER_URL
+
 fi
 
 
