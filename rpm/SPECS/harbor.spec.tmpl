@@ -1,0 +1,57 @@
+Name:           habor
+Version:        VERSION
+Release:        1
+Summary:        Short description (first char has to be uppercase)
+
+License:        GPL
+##URL:            
+
+BuildRoot: %{_topdir}/BUILD/%{name}-offline-installer-v%{version}.tgz
+#                 rpm/BUILD/harbor-offline-installer-v1.2.0.tgz
+
+##BuildRequires:  
+
+%description
+Description with almost 79 characters (first char has to be uppercase)
+
+#This is a comment (just as example)
+
+%prep
+
+%install 
+mkdir -p $RPM_BUILD_ROOT/opt
+install -m 644 %{name}-offline-installer-v%{version}.tgz $RPM_BUILD_ROOT/opt
+
+##rm -rf $RPM_BUILD_ROOT
+##mkdir -p $RPM_BUILD_ROOT/opt
+####cp %{name}-%{version}-%{release}.x86_64 $RPM_BUILD_ROOT/usr/bin/%{name}
+####cp -pv %{name}-offline-installer-v%{version}.tgz $RPM_BUILD_ROOT/opt/%{name}-offline-installer-v%{version}.tgz
+
+##################cd /opt
+##################tar xpf %{name}-offline-installer-v%{version}.tgz
+
+%setup -n harbor
+cd $RPM_SOURCES_DIR
+tar xpf %{name}-offline-installer-v%{version}.tgz
+
+##cd /usr/src/packages/SOURCES
+##tar -xvf CSFix.tar .
+##rm CSFix.tar
+##mkdir $RPM_BUILD_ROOT/opt/test
+##cp -R CSFix $RPM_BUILD_ROOT/opt/test
+##cd $RPM_BUILD_ROOT/opt/test/CSFix
+##chown -R root.root .
+##chomod -R a=rX,g-w,o-w .
+
+
+%files
+##%defattr(755,root,root)
+##%{_bindir}/docker-compose
+
+
+##/usr/share/applications/package_name.desktop
+##/usr/share/pixmaps/package_name.png
+
+%changelog
+
+
