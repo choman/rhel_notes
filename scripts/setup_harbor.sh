@@ -26,7 +26,7 @@ fi
 
 if $WITH_NOTARY;
 then
-   FLAGS="--with-notary "
+   FLAGS="$FLAGS --with-notary "
 fi
 
 
