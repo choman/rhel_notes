@@ -2,6 +2,10 @@
 
 KICKSTART_IP=172.16.1.15
 HARBOR_IP=172.16.1.40
+
+KICKSTART_IP=10.0.2.10
+HARBOR_IP=10.0.2.100
+
 HARBOR_HN="reg2 reg2.local.net"
 
 DOCKER_URL=http://${KICKSTART_IP}/yum/docker/docker.repo
