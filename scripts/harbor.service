@@ -1,0 +1,14 @@
+[Unit]
+Description = Harbor Service
+After = docker.service
+Requires = docker.service
+
+[Service]
+Type = simple
+User = root
+WorkingDirectory = /opt/harbor
+ExecStart = /bin/bash /opt/harbor/start.sh
+Restart = always
+
+[Install]
+WantedBy = graphical.target
