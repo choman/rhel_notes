@@ -1,5 +1,5 @@
 #!/bin/sh
 
 
-docker pull reg2.local.net/lm/centos
-docker run -it --rm reg2.local.net/lm/centos $@
+docker image pull reg2.local.net/lm/centos
+docker container run -it --rm reg2.local.net/lm/centos $@

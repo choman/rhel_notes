@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t firefox .
+docker image build -t firefox -t reg2.local.net/lm/firefox .

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t evince .
+docker image build -t evince .
