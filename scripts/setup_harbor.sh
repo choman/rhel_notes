@@ -18,15 +18,18 @@ TYPE=$(cut -d: -f7 /etc/system-release-cpe)
 
 
 FLAGS=""
+DCFLAGS="-f docker-compose.yml"
 
 if $WITH_CLAIR; 
 then
    FLAGS="--with-clair "
+   DCFLAGS="$DCFLAGS -f docker-compose.clair.yml"
 fi
 
 if $WITH_NOTARY;
 then
    FLAGS="$FLAGS --with-notary "
+   DCFLAGS="$DCFLAGS -f docker-compose.notary.yml"
 fi
 
 
@@ -52,4 +55,37 @@ cd /opt/harbor
 sudo rm harbor.cfg
 sudo wget -c -N http://${KICKSTART_IP}/yum/harbor/harbor.cfg
 sudo ./install.sh $FLAGS
+
+
+# create restart systemd stuff
+sudo tee /opt/harbor/start.sh > /dev/null <<EOF
+#!/usr/bin/bash
+
+cd /opt/harbor
+/usr/bin/docker-compose $DCFLAGS start
+
+EOF
+
+sudo tee /usr/lib/systemd/system/harbor.service > /dev/null <<EOF
+[Unit]
+Description = Harbor Service
+After = docker.service
+Requires = docker.service
+
+[Service]
+Type = simple
+User = root
+WorkingDirectory = /opt/harbor
+ExecStart = /bin/bash /opt/harbor/start.sh
+Restart = always
+
+[Install]
+WantedBy = graphical.target
+EOF
+
+sudo systemctl enable harbor
+##/etc/systemd/system/multi-user.target.wants/harbor.service
+
+
+
 
