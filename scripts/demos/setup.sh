@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+echo "Login to reg2.local.net"
 docker login -u choman reg2.local.net
 
 for image in alpine hello-world ubuntu centos
